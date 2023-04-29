@@ -1,3 +1,4 @@
+export { CustomChokidarWatcher } from './backends/CustomChokidarWatcher';
 export { ChokidarWatcher } from './backends/ChokidarWatcher';
 export { FileWatchingBackend } from './backends/FileWatchingBackend';
 export { FSWatcher } from './backends/FSWatcher';

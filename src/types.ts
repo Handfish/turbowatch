@@ -1,6 +1,7 @@
 // cspell:words idirname imatch iname wholename
 
 import { type FileWatchingBackend } from './backends/FileWatchingBackend';
+import { type FSWatcher } from 'chokidar';
 import { type Logger } from 'roarr';
 import { type ProcessOutput } from 'zx';
 
@@ -39,6 +40,7 @@ export type JsonObject = {
 };
 
 type File = {
+  chokidar?: FSWatcher;
   name: string;
 };
 
@@ -152,6 +154,7 @@ export type TurbowatchConfiguration = {
 };
 
 export type FileChangeEvent = {
+  chokidar?: FSWatcher;
   filename: string;
 };
 

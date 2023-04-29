@@ -155,7 +155,7 @@ export const watch = (
 
   let ready = false;
 
-  watcher.on('change', ({ filename }) => {
+  watcher.on('change', ({ chokidar, filename }) => {
     if (!ready) {
       log.warn('ignoring change event before ready');
 
@@ -163,6 +163,7 @@ export const watch = (
     }
 
     queuedFileChangeEvents.push({
+      chokidar,
       filename,
     });
 

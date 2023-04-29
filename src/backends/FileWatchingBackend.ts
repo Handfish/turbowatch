@@ -7,13 +7,15 @@ import path from 'node:path';
 
 interface BackendEventEmitter {
   on(name: 'ready', listener: () => void): this;
-  on(name: 'change', listener: ({ filename }: FileChangeEvent) => void): this;
+  on(
+    name: 'change',
+    listener: ({ chokidar, filename }: FileChangeEvent) => void,
+  ): this;
 }
 
 export abstract class FileWatchingBackend
   extends EventEmitter
-  implements BackendEventEmitter
-{
+  implements BackendEventEmitter {
   public constructor() {
     super();
   }
@@ -30,6 +32,7 @@ export abstract class FileWatchingBackend
     }
 
     this.emit('change', {
+      chokidar: event.chokidar,
       filename: event.filename,
     });
   }

@@ -106,12 +106,15 @@ export const subscribe = (trigger: Trigger): Subscription => {
           affectedPaths.push(filename);
           return true;
         })
-        .map(({ filename }) => {
+        .map(({ filename, chokidar }) => {
           return {
+            chokidar,
             name: filename,
           };
         }),
     };
+
+    // console.log(event);
 
     fileChangeEventQueue = [];
 
@@ -153,6 +156,7 @@ export const subscribe = (trigger: Trigger): Subscription => {
           attempt,
           files: event.files.map((file) => {
             return {
+              chokidar: file.chokidar,
               name: file.name,
             };
           }),

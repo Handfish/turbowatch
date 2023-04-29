@@ -12,6 +12,8 @@ words:
   - jiti
   - kuizinas
   - pipefail
+  - protobuf
+  - protoc
   - randomcolor
   - roarr
   - SIGINT
