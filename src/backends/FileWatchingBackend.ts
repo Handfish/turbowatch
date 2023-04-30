@@ -6,8 +6,10 @@ import { EventEmitter } from 'node:events';
 import path from 'node:path';
 
 interface BackendEventEmitter {
+  add?(): void;
   on(name: 'ready', listener: () => void): this;
   on(name: 'change', listener: ({ filename }: FileChangeEvent) => void): this;
+  unwatch?(): void;
 }
 
 export abstract class FileWatchingBackend
