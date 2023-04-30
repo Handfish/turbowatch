@@ -164,6 +164,7 @@ export const subscribe = (trigger: Trigger): Subscription => {
             throttleOutput: trigger.throttleOutput,
           }),
           taskId,
+          watcher: trigger.watcher,
         });
       },
       {

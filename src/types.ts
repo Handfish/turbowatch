@@ -60,6 +60,7 @@ export type ChangeEvent = {
     ...args: any[]
   ) => Promise<ProcessOutput>;
   taskId: string;
+  watcher?: FileWatchingBackend;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,6 +129,7 @@ export type Trigger = {
   persistent: boolean;
   retry: Retry;
   throttleOutput: Throttle;
+  watcher?: FileWatchingBackend;
 };
 
 export type WatcherConstructable = new (project: string) => FileWatchingBackend;
