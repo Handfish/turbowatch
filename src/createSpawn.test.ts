@@ -2,7 +2,7 @@ import { createSpawn } from './createSpawn';
 import { expect, it } from 'vitest';
 
 it('returns outputs', async () => {
-  const spawn = createSpawn('foo');
+  const spawn = createSpawn('foo', () => { });
 
   const result = await spawn`echo 'Hello, World!'`;
 
@@ -10,7 +10,7 @@ it('returns outputs', async () => {
 });
 
 it('injects path to node_modules/.bin', async () => {
-  const spawn = createSpawn('foo');
+  const spawn = createSpawn('foo', () => { });
 
   const result = await spawn`echo $PATH`;
 
@@ -18,7 +18,7 @@ it('injects path to node_modules/.bin', async () => {
 });
 
 it('rejects if process produces an error', async () => {
-  const spawn = createSpawn('foo');
+  const spawn = createSpawn('foo', () => { });
 
   await expect(spawn`does-not-exist`).rejects.toThrowError(
     'Program exited with code 127.',
@@ -32,7 +32,9 @@ it(
   async () => {
     const abortController = new AbortController();
 
-    const spawn = createSpawn('foo', { abortSignal: abortController.signal });
+    const spawn = createSpawn('foo', () => { }, {
+      abortSignal: abortController.signal,
+    });
 
     setTimeout(() => {
       void abortController.abort();
@@ -48,7 +50,9 @@ it(
   async () => {
     const abortController = new AbortController();
 
-    const spawn = createSpawn('foo', { abortSignal: abortController.signal });
+    const spawn = createSpawn('foo', () => { }, {
+      abortSignal: abortController.signal,
+    });
 
     setTimeout(() => {
       void abortController.abort();

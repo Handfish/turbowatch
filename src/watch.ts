@@ -115,6 +115,7 @@ export const watch = (
           retries: 0,
         },
         throttleOutput: trigger.throttleOutput ?? { delay: 1_000 },
+        watcher,
       }),
     );
   }

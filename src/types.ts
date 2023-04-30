@@ -56,10 +56,10 @@ export type ChangeEvent = {
   first: boolean;
   log: Logger;
   spawn: (
-    pieces: TemplateStringsArray,
-    ...args: any[]
-  ) => Promise<ProcessOutput>;
+    onKill: Function,
+  ) => (pieces: TemplateStringsArray, ...args: any[]) => Promise<ProcessOutput>;
   taskId: string;
+  watcher?: FileWatchingBackend;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,6 +128,7 @@ export type Trigger = {
   persistent: boolean;
   retry: Retry;
   throttleOutput: Throttle;
+  watcher?: FileWatchingBackend;
 };
 
 export type WatcherConstructable = new (project: string) => FileWatchingBackend;
