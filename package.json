@@ -50,10 +50,10 @@
   ],
   "license": "BSD-3-Clause",
   "main": "./dist/index.js",
-  "name": "turbowatch",
+  "name": "@kudovs/turbowatch",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gajus/turbowatch"
+    "url": "https://github.com/handfish/turbowatch"
   },
   "scripts": {
     "build": "rm -fr ./dist && tsc --project tsconfig.build.json",
@@ -65,5 +65,5 @@
     "test:vitest": "vitest --passWithNoTests"
   },
   "types": "./dist/index.d.ts",
-  "version": "1.0.0"
+  "version": "0.0.1"
 }
