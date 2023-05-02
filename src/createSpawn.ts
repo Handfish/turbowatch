@@ -24,6 +24,7 @@ const prefixLines = (subject: string, prefix: string): string => {
 
 export const createSpawn = (
   taskId: string,
+  onKill: Function,
   {
     cwd = process.cwd(),
     abortSignal,
@@ -111,6 +112,7 @@ export const createSpawn = (
     if (abortSignal) {
       const kill = () => {
         // TODO we might want to make this configurable (e.g. behind a debug flag), because these logs might provide valuable context when debugging shutdown logic.
+        onKill();
         processPromise.stdout.off('data', onStdout);
         processPromise.stderr.off('data', onStderr);
 
@@ -132,10 +134,12 @@ export const createSpawn = (
     flush();
 
     if (result.exitCode === 0) {
+      onKill();
       return result;
     }
 
     if (abortSignal?.aborted) {
+      onKill();
       throw new Error('Program was aborted.');
     }
 

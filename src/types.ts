@@ -56,9 +56,8 @@ export type ChangeEvent = {
   first: boolean;
   log: Logger;
   spawn: (
-    pieces: TemplateStringsArray,
-    ...args: any[]
-  ) => Promise<ProcessOutput>;
+    onKill: Function,
+  ) => (pieces: TemplateStringsArray, ...args: any[]) => Promise<ProcessOutput>;
   taskId: string;
   watcher?: FileWatchingBackend;
 };

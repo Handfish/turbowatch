@@ -158,11 +158,13 @@ export const subscribe = (trigger: Trigger): Subscription => {
           }),
           first: currentFirst,
           log,
-          spawn: createSpawn(taskId, {
-            abortSignal,
-            cwd: trigger.cwd,
-            throttleOutput: trigger.throttleOutput,
-          }),
+          spawn: (onKill: Function) => {
+            return createSpawn(taskId, onKill, {
+              abortSignal,
+              cwd: trigger.cwd,
+              throttleOutput: trigger.throttleOutput,
+            });
+          },
           taskId,
           watcher: trigger.watcher,
         });
@@ -227,7 +229,7 @@ export const subscribe = (trigger: Trigger): Subscription => {
 
         try {
           await trigger.onTeardown({
-            spawn: createSpawn(taskId, {
+            spawn: createSpawn(taskId, () => {}, {
               throttleOutput: trigger.throttleOutput,
             }),
           });
